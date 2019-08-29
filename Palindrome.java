@@ -1,27 +1,58 @@
+import java.io.BufferedReader;
+import java.io.IOException;;
+import java.io.InputStreamReader;
+
 public class Palindrome
 {
 
     public static boolean isPalindrome(String word)
     {
-        boolean is_palindrome = false;
-
-        StringBuilder string_builder = new StringBuilder(word);
-        String reversed_word = string_builder.reverse().toString();
-
-        is_palindrome = word.equals(reversed_word);
-
-        return is_palindrome;
+        int inc = 0;
+        int des = word.length()-1;
+        boolean bError = false;
+    
+    while ((inc<des) && (!bError)){
+ 
+	if (word.charAt(inc)==word.charAt(des)){				
+		inc++;
+		des--;
+	  } else {
+		bError = true;
+	         }
+    }
 
     }
 
     public static void main(String[] args) {
 
-        String word = "palabra";
+        String message = null;
 
-        if (isPalindrome(word)) {
-            System.out.println(1);
+        if (args.length == 0) {
+
+            BufferedReader reader = null;
+
+            try {
+
+                reader = new BufferedReader(new InputStreamReader(System.in));
+
+                System.out.print("Enter a message << ");
+                message = reader.readLine();
+
+            } catch (IOException e) {
+
+                return;
+
+            }
         } else {
-            System.out.println(0);
+
+            message = args[0];
+
+        }
+
+        if (isPalindrome(message)) {
+            System.out.println("Es Palindromo");
+        } else {
+            System.out.println("No es palindromo");
         }
 
     }
